@@ -1,0 +1,9 @@
+- Use node >= 25
+- follow SOLID principles
+- follow don't repeat yourself (DRY) principle
+- write clean and maintainable code
+- use TDD (Test Driven Development) approach
+- don't swallow errors, handle them properly
+- use strict typing with TypeScript
+- enrich logging with contextual information
+- when introducing a new convention, pattern, or hardening (e.g. error handling, input coercion, validation), audit existing code for the same gap — apply it retroactively across the codebase, not just to the new code

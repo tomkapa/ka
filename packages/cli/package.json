@@ -1,0 +1,24 @@
+{
+  "name": "@flowdiagram/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "flowdiagram": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@flowdiagram/core": "workspace:*",
+    "commander": "^13.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
+  }
+}

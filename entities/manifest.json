@@ -1,0 +1,205 @@
+{
+  "version": "1.0",
+  "entities": [
+    {
+      "id": "process",
+      "name": "Process",
+      "category": "general",
+      "tags": ["flowchart", "step", "action"],
+      "description": "Process step in a flowchart",
+      "image": "categories/general/process.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "decision",
+      "name": "Decision",
+      "category": "general",
+      "tags": ["flowchart", "condition", "branch", "if"],
+      "description": "Decision point in a flowchart",
+      "image": "categories/general/decision.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "start-end",
+      "name": "Start/End",
+      "category": "general",
+      "tags": ["flowchart", "terminal", "start", "end", "begin", "finish"],
+      "description": "Start or end terminal in a flowchart",
+      "image": "categories/general/start-end.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "document",
+      "name": "Document",
+      "category": "general",
+      "tags": ["flowchart", "document", "file", "report"],
+      "description": "Document symbol",
+      "image": "categories/general/document.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "category": "general",
+      "tags": ["flowchart", "data", "input", "output", "io"],
+      "description": "Data input/output symbol",
+      "image": "categories/general/data.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "router",
+      "name": "Router",
+      "category": "networking",
+      "tags": ["network", "routing", "infrastructure", "hardware"],
+      "description": "Network router device",
+      "image": "categories/networking/router.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "switch",
+      "name": "Switch",
+      "category": "networking",
+      "tags": ["network", "switch", "infrastructure", "hardware"],
+      "description": "Network switch device",
+      "image": "categories/networking/switch.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "firewall",
+      "name": "Firewall",
+      "category": "networking",
+      "tags": ["network", "security", "firewall", "protection"],
+      "description": "Network firewall",
+      "image": "categories/networking/firewall.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "load-balancer",
+      "name": "Load Balancer",
+      "category": "networking",
+      "tags": ["network", "load-balancer", "infrastructure", "scaling"],
+      "description": "Load balancer for distributing traffic",
+      "image": "categories/networking/load-balancer.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "server",
+      "name": "Server",
+      "category": "networking",
+      "tags": ["server", "infrastructure", "hardware", "compute"],
+      "description": "Server computer",
+      "image": "categories/networking/server.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud",
+      "category": "networking",
+      "tags": ["cloud", "infrastructure", "internet", "service"],
+      "description": "Cloud service",
+      "image": "categories/networking/cloud.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "category": "databases",
+      "tags": ["database", "sql", "relational", "postgres"],
+      "description": "PostgreSQL relational database",
+      "image": "categories/databases/postgresql.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "mysql",
+      "name": "MySQL",
+      "category": "databases",
+      "tags": ["database", "sql", "relational"],
+      "description": "MySQL relational database",
+      "image": "categories/databases/mysql.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "category": "databases",
+      "tags": ["database", "cache", "key-value", "nosql", "in-memory"],
+      "description": "Redis in-memory data store",
+      "image": "categories/databases/redis.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "mongodb",
+      "name": "MongoDB",
+      "category": "databases",
+      "tags": ["database", "nosql", "document", "mongo"],
+      "description": "MongoDB document database",
+      "image": "categories/databases/mongodb.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "queue",
+      "name": "Queue",
+      "category": "messaging",
+      "tags": ["message", "queue", "async", "broker"],
+      "description": "Message queue",
+      "image": "categories/messaging/queue.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "topic",
+      "name": "Topic",
+      "category": "messaging",
+      "tags": ["message", "topic", "pubsub", "event"],
+      "description": "Pub/sub topic",
+      "image": "categories/messaging/topic.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "stream",
+      "name": "Stream",
+      "category": "messaging",
+      "tags": ["message", "stream", "event", "data", "real-time"],
+      "description": "Event or data stream",
+      "image": "categories/messaging/stream.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "user",
+      "name": "User",
+      "category": "general",
+      "tags": ["user", "person", "actor", "client"],
+      "description": "User or actor",
+      "image": "categories/general/user.svg",
+      "format": "svg",
+      "animated": false
+    },
+    {
+      "id": "api-gateway",
+      "name": "API Gateway",
+      "category": "networking",
+      "tags": ["api", "gateway", "rest", "endpoint", "interface"],
+      "description": "API Gateway endpoint",
+      "image": "categories/networking/api-gateway.svg",
+      "format": "svg",
+      "animated": false
+    }
+  ]
+}
