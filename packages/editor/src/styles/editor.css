@@ -346,6 +346,62 @@ body,
   flex: 1;
 }
 
+/* GIF export progress overlay */
+.gif-export-progress {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gif-export-progress__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.gif-export-progress__dialog {
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px 32px;
+  min-width: 260px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.gif-export-progress__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.gif-export-progress__bar-track {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.gif-export-progress__bar-fill {
+  height: 100%;
+  background: #1565c0;
+  border-radius: 3px;
+  transition: width 0.1s ease;
+}
+
+.gif-export-progress__label {
+  font-size: 12px;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Right sidebar for panels */
 .app-right-sidebar {
   width: 280px;

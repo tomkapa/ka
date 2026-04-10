@@ -6,8 +6,11 @@ import { AnimationControls } from './components/AnimationControls.js';
 import { AnimationPanel } from './components/panels/AnimationPanel.js';
 import { NodeEffectsPanel } from './components/panels/NodeEffectsPanel.js';
 import { PropertiesPanel } from './components/panels/PropertiesPanel.js';
+import { GifExportProgress } from './components/GifExportProgress.js';
 import { useFlowDiagram } from './hooks/useFlowDiagram.js';
 import { useAnimation } from './hooks/useAnimation.js';
+import { useGifExport } from './hooks/useGifExport.js';
+import { downloadBlob } from './utils/downloadBlob.js';
 import {
   DiagramBuilder,
   DiagramValidator,
@@ -159,6 +162,17 @@ function EditorContent() {
     seekTo,
   } = useAnimation(diagram);
 
+  const { isExporting, exportProgress, exportGif } = useGifExport(
+    diagram,
+    reactFlowWrapper,
+    seekTo,
+    duration,
+  );
+
+  const handleExportGif = useCallback(() => {
+    exportGif().catch((err: Error) => alert(`GIF export failed: ${err.message}`));
+  }, [exportGif]);
+
   const handleNew = useCallback(() => {
     loadDiagram(new DiagramBuilder({ name: 'Untitled' }).build());
   }, [loadDiagram]);
@@ -166,14 +180,8 @@ function EditorContent() {
   const handleSave = useCallback(() => {
     const d = saveDiagram();
     if (!d) return;
-    const json = JSON.stringify(d, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${d.meta.name || 'diagram'}.flow.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
+    downloadBlob(blob, `${d.meta.name || 'diagram'}.flow.json`);
   }, [saveDiagram]);
 
   const handleOpen = useCallback(() => {
@@ -237,6 +245,8 @@ function EditorContent() {
   );
 
   return (
+    <>
+    {isExporting && <GifExportProgress progress={exportProgress} />}
     <div className="app-layout">
       <div className="app-sidebar">
         <div style={{ padding: '10px 12px', borderBottom: '1px solid #e0e0e0' }}>
@@ -255,6 +265,13 @@ function EditorContent() {
           <button onClick={handleNew}>New</button>
           <button onClick={handleOpen}>Open</button>
           <button onClick={handleSave}>Save</button>
+          <button
+            onClick={handleExportGif}
+            disabled={isExporting || !diagram?.animation}
+            title="Export animation as GIF"
+          >
+            Export GIF
+          </button>
           <div style={{ marginLeft: 8, borderLeft: '1px solid #e0e0e0', paddingLeft: 8 }}>
             <AnimationControls
               isPlaying={isPlaying}
@@ -303,6 +320,7 @@ function EditorContent() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

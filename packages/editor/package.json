@@ -13,6 +13,8 @@
     "@flowdiagram/core": "workspace:*",
     "@xyflow/react": "^12.6.0",
     "fuse.js": "^7.1.0",
+    "gif.js": "^0.2.0",
+    "html2canvas": "^1.4.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
