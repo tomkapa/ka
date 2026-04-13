@@ -346,6 +346,129 @@ body,
   flex: 1;
 }
 
+/* GIF export configuration dialog */
+.gif-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.gif-dialog {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0;
+  width: 340px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.gif-dialog__header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.gif-dialog__body {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gif-dialog__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gif-dialog__label {
+  font-size: 12px;
+  color: #555;
+  min-width: 60px;
+}
+
+.gif-dialog__input--number {
+  width: 80px;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.gif-dialog__input--range {
+  flex: 1;
+  cursor: pointer;
+}
+
+.gif-dialog__unit {
+  font-size: 11px;
+  color: #888;
+}
+
+.gif-dialog__unit--fixed {
+  min-width: 44px;
+  text-align: right;
+}
+
+.gif-dialog__estimate {
+  margin-top: 4px;
+  padding: 8px 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.gif-dialog__estimate-size {
+  font-weight: 600;
+  color: #333;
+}
+
+.gif-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 20px 16px;
+  border-top: 1px solid #eee;
+}
+
+.gif-dialog__btn {
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.gif-dialog__btn--cancel {
+  background: #fff;
+  color: #555;
+}
+
+.gif-dialog__btn--cancel:hover {
+  background: #f5f5f5;
+}
+
+.gif-dialog__btn--export {
+  background: #1565c0;
+  color: #fff;
+  border-color: #1565c0;
+}
+
+.gif-dialog__btn--export:hover {
+  background: #1251a0;
+}
+
 /* GIF export progress overlay */
 .gif-export-progress {
   position: fixed;

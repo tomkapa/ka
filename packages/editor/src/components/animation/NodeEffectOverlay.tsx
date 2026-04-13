@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
 import { useViewport, type Node as RFNode } from '@xyflow/react';
 import type { NodeEffectState, NodeEffectType } from '@flowdiagram/core';
+import { useEffectGeometry } from './resolveEffectGeometry.js';
 
 interface NodeEffectOverlayProps {
   effects: NodeEffectState[];
@@ -9,31 +9,7 @@ interface NodeEffectOverlayProps {
 
 export function NodeEffectOverlay({ effects, rfNodes }: NodeEffectOverlayProps) {
   const { x: vpX, y: vpY, zoom } = useViewport();
-
-  const effectRenders = useMemo(() => {
-    const nodeMap = new Map(rfNodes.map((n) => [n.id, n]));
-
-    return effects
-      .map((effect) => {
-        const node = nodeMap.get(effect.nodeId);
-        if (!node) return null;
-
-        return {
-          effect,
-          x: node.position.x,
-          y: node.position.y,
-          width: node.width ?? 120,
-          height: node.height ?? 60,
-        };
-      })
-      .filter(Boolean) as Array<{
-      effect: NodeEffectState;
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    }>;
-  }, [effects, rfNodes]);
+  const effectRenders = useEffectGeometry(effects, rfNodes);
 
   if (effectRenders.length === 0) return null;
 

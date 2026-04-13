@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react';
-import { ReactFlowProvider, useReactFlow } from '@xyflow/react';
+import { ReactFlowProvider, useReactFlow, getNodesBounds, getViewportForBounds } from '@xyflow/react';
 import { Canvas } from './components/Canvas.js';
 import { EntitySearchPanel } from './components/EntitySearchPanel.js';
 import { AnimationControls } from './components/AnimationControls.js';
@@ -7,10 +7,12 @@ import { AnimationPanel } from './components/panels/AnimationPanel.js';
 import { NodeEffectsPanel } from './components/panels/NodeEffectsPanel.js';
 import { PropertiesPanel } from './components/panels/PropertiesPanel.js';
 import { GifExportProgress } from './components/GifExportProgress.js';
+import { GifExportDialog } from './components/GifExportDialog.js';
 import { useFlowDiagram } from './hooks/useFlowDiagram.js';
 import { useAnimation } from './hooks/useAnimation.js';
 import { useGifExport } from './hooks/useGifExport.js';
 import { downloadBlob } from './utils/downloadBlob.js';
+import { DEFAULT_GIF_CONFIG, type GifExportConfig } from './types/gifExportConfig.js';
 import {
   DiagramBuilder,
   DiagramValidator,
@@ -139,7 +141,7 @@ function addEntityNode(
 function EditorContent() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const [rightTab, setRightTab] = useState<RightTab>('animation');
-  const { screenToFlowPosition } = useReactFlow();
+  const { screenToFlowPosition, setViewport } = useReactFlow();
   const {
     nodes,
     edges,
@@ -162,15 +164,30 @@ function EditorContent() {
     seekTo,
   } = useAnimation(diagram);
 
+  const fitForExport = useCallback(
+    (width: number, height: number) => {
+      const bounds = getNodesBounds(nodes);
+      const viewport = getViewportForBounds(bounds, width, height, 0.1, 2, 0.1);
+      setViewport(viewport);
+    },
+    [nodes, setViewport],
+  );
+
   const { isExporting, exportProgress, exportGif } = useGifExport(
     diagram,
     reactFlowWrapper,
     seekTo,
-    duration,
+    fitForExport,
   );
 
-  const handleExportGif = useCallback(() => {
-    exportGif().catch((err: Error) => alert(`GIF export failed: ${err.message}`));
+  const [showExportDialog, setShowExportDialog] = useState(false);
+
+  const handleExportGif = useCallback((config: GifExportConfig) => {
+    setShowExportDialog(false);
+    exportGif(config).catch((err: Error) => {
+      console.error(err);
+      alert(`GIF export failed: ${err.message}`);
+    });
   }, [exportGif]);
 
   const handleNew = useCallback(() => {
@@ -246,6 +263,13 @@ function EditorContent() {
 
   return (
     <>
+    {showExportDialog && (
+      <GifExportDialog
+        initialConfig={{ ...DEFAULT_GIF_CONFIG, duration: duration || DEFAULT_GIF_CONFIG.duration }}
+        onExport={handleExportGif}
+        onCancel={() => setShowExportDialog(false)}
+      />
+    )}
     {isExporting && <GifExportProgress progress={exportProgress} />}
     <div className="app-layout">
       <div className="app-sidebar">
@@ -266,7 +290,7 @@ function EditorContent() {
           <button onClick={handleOpen}>Open</button>
           <button onClick={handleSave}>Save</button>
           <button
-            onClick={handleExportGif}
+            onClick={() => setShowExportDialog(true)}
             disabled={isExporting || !diagram?.animation}
             title="Export animation as GIF"
           >
@@ -294,6 +318,7 @@ function EditorContent() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             animationState={frameState}
+            exportOverlay={isExporting}
           />
         </div>
       </div>

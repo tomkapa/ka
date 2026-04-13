@@ -14,6 +14,7 @@ import { nodeTypes } from './nodes/index.js';
 import { edgeTypes } from './edges/index.js';
 import { ParticleOverlay } from './animation/ParticleOverlay.js';
 import { NodeEffectOverlay } from './animation/NodeEffectOverlay.js';
+import { NodeEffectExportOverlay } from './animation/NodeEffectExportOverlay.js';
 import type { AnimationFrameState } from '@flowdiagram/core';
 
 interface CanvasProps {
@@ -25,6 +26,8 @@ interface CanvasProps {
   onDrop?: (event: React.DragEvent) => void;
   onDragOver?: (event: React.DragEvent) => void;
   animationState?: AnimationFrameState;
+  /** When true, render effects as SVG instead of CSS box-shadow for html2canvas. */
+  exportOverlay?: boolean;
 }
 
 export function Canvas({
@@ -36,6 +39,7 @@ export function Canvas({
   onDrop,
   onDragOver,
   animationState,
+  exportOverlay,
 }: CanvasProps) {
   return (
     <ReactFlow
@@ -57,12 +61,18 @@ export function Canvas({
       {animationState && animationState.particles.length > 0 && (
         <ParticleOverlay particles={animationState.particles} />
       )}
-      {animationState && animationState.nodeEffects.length > 0 && (
-        <NodeEffectOverlay
-          effects={animationState.nodeEffects}
-          rfNodes={nodes}
-        />
-      )}
+      {animationState && animationState.nodeEffects.length > 0 &&
+        (exportOverlay ? (
+          <NodeEffectExportOverlay
+            effects={animationState.nodeEffects}
+            rfNodes={nodes}
+          />
+        ) : (
+          <NodeEffectOverlay
+            effects={animationState.nodeEffects}
+            rfNodes={nodes}
+          />
+        ))}
     </ReactFlow>
   );
 }
